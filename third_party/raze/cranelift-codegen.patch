@@ -1,0 +1,11 @@
+--- cranelift/codegen/build.rs	2022-10-30 17:25:04.000000000 +0100
++++ cranelift/codegen/build.rs	2022-10-30 17:28:54.000000000 +0100
+@@ -50 +50 @@
+-    let crate_dir = cur_dir.as_path();
++    let crate_dir = cur_dir.as_path().join("cranelift").join("codegen");
+@@ -52 +52 @@
+-    println!("cargo:rerun-if-changed=build.rs");
++    println!("cargo:rerun-if-changed=cranelift/codegen/build.rs");
+@@ -84 +84 @@
+-        if let Err(err) = build_isle(crate_dir, isle_dir) {
++        if let Err(err) = build_isle(crate_dir.as_path(), isle_dir) {

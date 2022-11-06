@@ -1,0 +1,15 @@
+[package]
+name = "zero_out"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# wit-bindgen-cli = { git = "https://github.com/bytecodealliance/wit-bindgen", version = "0.3.0" }
+# wasm-bindgen = "0.2.83"
+wit-bindgen-guest-rust = { git = "https://github.com/bytecodealliance/wit-bindgen", rev = "f22e230007d3706dddfa14177450e69b7260557f" }
+  

@@ -1,0 +1,68 @@
+"""
+@generated
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+# buildifier: disable=load
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+# buildifier: disable=load
+load(
+    "@rules_rust//rust:defs.bzl",
+    "rust_binary",
+    "rust_library",
+    "rust_proc_macro",
+    "rust_test",
+)
+
+package(default_visibility = [
+    # Public for visibility by "@raze__crate__version//" targets.
+    #
+    # Prefer access through "//third_party/cargo", which limits external
+    # visibility to explicit Cargo.toml dependencies.
+    "//visibility:public",
+])
+
+licenses([
+    "notice",  # Apache-2.0 from expression "Apache-2.0"
+])
+
+# Generated Targets
+
+rust_library(
+    name = "wasmtime_cranelift",
+    srcs = glob(["**/*.rs"]),
+    crate_features = [
+        "component-model",
+    ],
+    crate_root = "crates/cranelift/src/lib.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wasmtime-cranelift",
+        "manual",
+    ],
+    version = "3.0.0",
+    # buildifier: leave-alone
+    deps = [
+        "@raze__anyhow__1_0_65//:anyhow",
+        "@raze__cranelift_codegen__0_90_0//:cranelift_codegen",
+        "@raze__cranelift_entity__0_90_0//:cranelift_entity",
+        "@raze__cranelift_frontend__0_90_0//:cranelift_frontend",
+        "@raze__cranelift_native__0_90_0//:cranelift_native",
+        "@raze__cranelift_wasm__0_90_0//:cranelift_wasm",
+        "@raze__gimli__0_26_2//:gimli",
+        "@raze__log__0_4_17//:log",
+        "@raze__object__0_29_0//:object",
+        "@raze__target_lexicon__0_12_4//:target_lexicon",
+        "@raze__thiserror__1_0_37//:thiserror",
+        "@raze__wasmparser__0_93_0//:wasmparser",
+        "@raze__wasmtime_environ__3_0_0//:wasmtime_environ",
+    ],
+)

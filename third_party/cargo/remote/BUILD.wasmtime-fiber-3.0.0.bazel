@@ -1,0 +1,115 @@
+"""
+@generated
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+# buildifier: disable=load
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+# buildifier: disable=load
+load(
+    "@rules_rust//rust:defs.bzl",
+    "rust_binary",
+    "rust_library",
+    "rust_proc_macro",
+    "rust_test",
+)
+
+package(default_visibility = [
+    # Public for visibility by "@raze__crate__version//" targets.
+    #
+    # Prefer access through "//third_party/cargo", which limits external
+    # visibility to explicit Cargo.toml dependencies.
+    "//visibility:public",
+])
+
+licenses([
+    "notice",  # Apache-2.0 from expression "Apache-2.0"
+])
+
+# Generated Targets
+# buildifier: disable=out-of-order-load
+# buildifier: disable=load-on-top
+load(
+    "@rules_rust//cargo:cargo_build_script.bzl",
+    "cargo_build_script",
+)
+
+cargo_build_script(
+    name = "wasmtime_fiber_build_script",
+    srcs = glob(["**/*.rs"]),
+    build_script_env = {
+    },
+    crate_root = "crates/fiber/build.rs",
+    data = glob(["**"], exclude=["**/*.pdf"]),
+    edition = "2021",
+    links = "wasmtime-fiber-shims",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+    version = "3.0.0",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@raze__cc__1_0_73//:cc",
+    ] + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-apple-darwin",
+            "@rules_rust//rust/platform:x86_64-unknown-linux-gnu",
+        ): [
+        ],
+        "//conditions:default": [],
+    }) + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-pc-windows-msvc",
+        ): [
+            "@raze__windows_sys__0_36_1//:windows_sys",
+        ],
+        "//conditions:default": [],
+    }),
+)
+
+rust_library(
+    name = "wasmtime_fiber",
+    srcs = glob(["**/*.rs"]),
+    aliases = {
+    },
+    crate_root = "crates/fiber/src/lib.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wasmtime-fiber",
+        "manual",
+    ],
+    version = "3.0.0",
+    # buildifier: leave-alone
+    deps = [
+        ":wasmtime_fiber_build_script",
+        "@raze__cfg_if__1_0_0//:cfg_if",
+    ] + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-apple-darwin",
+            "@rules_rust//rust/platform:x86_64-unknown-linux-gnu",
+        ): [
+            "@raze__rustix__0_35_11//:rustix",
+            "@raze__wasmtime_asm_macros__3_0_0//:wasmtime_asm_macros",
+        ],
+        "//conditions:default": [],
+    }) + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-pc-windows-msvc",
+        ): [
+            "@raze__windows_sys__0_36_1//:windows_sys",
+        ],
+        "//conditions:default": [],
+    }),
+)

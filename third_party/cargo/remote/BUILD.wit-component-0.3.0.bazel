@@ -1,0 +1,126 @@
+"""
+@generated
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+# buildifier: disable=load
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+# buildifier: disable=load
+load(
+    "@rules_rust//rust:defs.bzl",
+    "rust_binary",
+    "rust_library",
+    "rust_proc_macro",
+    "rust_test",
+)
+
+package(default_visibility = [
+    # Public for visibility by "@raze__crate__version//" targets.
+    #
+    # Prefer access through "//third_party/cargo", which limits external
+    # visibility to explicit Cargo.toml dependencies.
+    "//visibility:public",
+])
+
+licenses([
+    "restricted",  # no license
+])
+
+# Generated Targets
+
+rust_binary(
+    # Prefix bin name to disambiguate from (probable) collision with lib name
+    # N.B.: The exact form of this is subject to change.
+    name = "cargo_bin_wasm2wit",
+    srcs = glob(["**/*.rs"]),
+    crate_root = "crates/wit-component/src/bin/wasm2wit.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wasm2wit",
+        "manual",
+    ],
+    version = "0.3.0",
+    # buildifier: leave-alone
+    deps = [
+        ":wit_component",
+        "@raze__anyhow__1_0_65//:anyhow",
+        "@raze__bitflags__1_3_2//:bitflags",
+        "@raze__indexmap__1_9_1//:indexmap",
+        "@raze__log__0_4_17//:log",
+        "@raze__wasm_encoder__0_19_0//:wasm_encoder",
+        "@raze__wasmparser__0_93_0//:wasmparser",
+        "@raze__wat__1_0_50//:wat",
+        "@raze__wit_parser__0_3_0//:wit_parser",
+    ],
+)
+
+rust_binary(
+    # Prefix bin name to disambiguate from (probable) collision with lib name
+    # N.B.: The exact form of this is subject to change.
+    name = "cargo_bin_wit_component",
+    srcs = glob(["**/*.rs"]),
+    crate_root = "crates/wit-component/src/bin/wit-component.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wit-component",
+        "manual",
+    ],
+    version = "0.3.0",
+    # buildifier: leave-alone
+    deps = [
+        ":wit_component",
+        "@raze__anyhow__1_0_65//:anyhow",
+        "@raze__bitflags__1_3_2//:bitflags",
+        "@raze__indexmap__1_9_1//:indexmap",
+        "@raze__log__0_4_17//:log",
+        "@raze__wasm_encoder__0_19_0//:wasm_encoder",
+        "@raze__wasmparser__0_93_0//:wasmparser",
+        "@raze__wat__1_0_50//:wat",
+        "@raze__wit_parser__0_3_0//:wit_parser",
+    ],
+)
+
+rust_library(
+    name = "wit_component",
+    srcs = glob(["**/*.rs"]),
+    crate_root = "crates/wit-component/src/lib.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wit-component",
+        "manual",
+    ],
+    version = "0.3.0",
+    # buildifier: leave-alone
+    deps = [
+        "@raze__anyhow__1_0_65//:anyhow",
+        "@raze__bitflags__1_3_2//:bitflags",
+        "@raze__indexmap__1_9_1//:indexmap",
+        "@raze__log__0_4_17//:log",
+        "@raze__wasm_encoder__0_19_0//:wasm_encoder",
+        "@raze__wasmparser__0_93_0//:wasmparser",
+        "@raze__wat__1_0_50//:wat",
+        "@raze__wit_parser__0_3_0//:wit_parser",
+    ],
+)
+
+# Unsupported target "components" with type "test" omitted
+
+# Unsupported target "interfaces" with type "test" omitted

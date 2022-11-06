@@ -1,0 +1,149 @@
+"""
+@generated
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+# buildifier: disable=load
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+# buildifier: disable=load
+load(
+    "@rules_rust//rust:defs.bzl",
+    "rust_binary",
+    "rust_library",
+    "rust_proc_macro",
+    "rust_test",
+)
+
+package(default_visibility = [
+    # Public for visibility by "@raze__crate__version//" targets.
+    #
+    # Prefer access through "//third_party/cargo", which limits external
+    # visibility to explicit Cargo.toml dependencies.
+    "//visibility:public",
+])
+
+licenses([
+    "notice",  # Apache-2.0 from expression "Apache-2.0"
+])
+
+# Generated Targets
+# buildifier: disable=out-of-order-load
+# buildifier: disable=load-on-top
+load(
+    "@rules_rust//cargo:cargo_build_script.bzl",
+    "cargo_build_script",
+)
+
+cargo_build_script(
+    name = "wasmtime_build_script",
+    srcs = glob(["**/*.rs"]),
+    build_script_env = {
+    },
+    crate_features = [
+        "async",
+        "cache",
+        "component-model",
+        "cranelift",
+        "default",
+        "jitdump",
+        "memory-init-cow",
+        "parallel-compilation",
+        "pooling-allocator",
+        "vtune",
+        "wat",
+    ],
+    crate_root = "crates/wasmtime/build.rs",
+    data = glob(["**"], exclude=["**/*.pdf"]),
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+    version = "3.0.0",
+    visibility = ["//visibility:private"],
+    deps = [
+    ] + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-pc-windows-msvc",
+        ): [
+            "@raze__windows_sys__0_36_1//:windows_sys",
+        ],
+        "//conditions:default": [],
+    }),
+)
+
+rust_library(
+    name = "wasmtime",
+    srcs = glob(["**/*.rs"]),
+    aliases = {
+    },
+    crate_features = [
+        "async",
+        "cache",
+        "component-model",
+        "cranelift",
+        "default",
+        "jitdump",
+        "memory-init-cow",
+        "parallel-compilation",
+        "pooling-allocator",
+        "vtune",
+        "wat",
+    ],
+    crate_root = "crates/wasmtime/src/lib.rs",
+    data = [],
+    edition = "2021",
+    proc_macro_deps = [
+        "@raze__async_trait__0_1_57//:async_trait",
+        "@raze__paste__1_0_9//:paste",
+        "@raze__wasmtime_component_macro__3_0_0//:wasmtime_component_macro",
+    ],
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wasmtime",
+        "manual",
+    ],
+    version = "3.0.0",
+    # buildifier: leave-alone
+    deps = [
+        ":wasmtime_build_script",
+        "@raze__anyhow__1_0_65//:anyhow",
+        "@raze__bincode__1_3_3//:bincode",
+        "@raze__cfg_if__1_0_0//:cfg_if",
+        "@raze__encoding_rs__0_8_31//:encoding_rs",
+        "@raze__indexmap__1_9_1//:indexmap",
+        "@raze__libc__0_2_134//:libc",
+        "@raze__log__0_4_17//:log",
+        "@raze__object__0_29_0//:object",
+        "@raze__once_cell__1_15_0//:once_cell",
+        "@raze__psm__0_1_21//:psm",
+        "@raze__rayon__1_5_3//:rayon",
+        "@raze__serde__1_0_145//:serde",
+        "@raze__target_lexicon__0_12_4//:target_lexicon",
+        "@raze__wasmparser__0_93_0//:wasmparser",
+        "@raze__wasmtime_cache__3_0_0//:wasmtime_cache",
+        "@raze__wasmtime_component_util__3_0_0//:wasmtime_component_util",
+        "@raze__wasmtime_cranelift__3_0_0//:wasmtime_cranelift",
+        "@raze__wasmtime_environ__3_0_0//:wasmtime_environ",
+        "@raze__wasmtime_fiber__3_0_0//:wasmtime_fiber",
+        "@raze__wasmtime_jit__3_0_0//:wasmtime_jit",
+        "@raze__wasmtime_runtime__3_0_0//:wasmtime_runtime",
+        "@raze__wat__1_0_50//:wat",
+    ] + selects.with_or({
+        (
+            "@rules_rust//rust/platform:x86_64-pc-windows-msvc",
+        ): [
+            "@raze__windows_sys__0_36_1//:windows_sys",
+        ],
+        "//conditions:default": [],
+    }),
+)

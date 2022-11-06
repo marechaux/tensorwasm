@@ -1,0 +1,16 @@
+{
+    "task.allowAutomaticTasks": "on",
+    "rust-analyzer.checkOnSave.command": "clippy",
+    "rust-analyzer.procMacro.attributes.enable": true,
+    "files.exclude": {
+        // "bazel-*": true
+    },
+    "files.insertFinalNewline": true,
+    "editor.tabSize": 2,
+    "files.associations": {
+        "alignedvector3": "cpp",
+        "nnls": "cpp",
+        "*.inc": "cpp",
+        "vector": "cpp"
+    }
+}

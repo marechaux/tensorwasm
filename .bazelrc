@@ -1,0 +1,31 @@
+build --apple_platform_type=macos
+
+# Enable using platform specific build settings
+build --enable_platform_specific_config
+
+# Enable using 'cc_shared_library' rule.
+build --experimental_cc_shared_library
+
+# Flag to enable remote config
+common --experimental_repo_remote_exec
+
+# Suppress C++ compiler warnings, otherwise build logs become 10s of MBs.
+build:linux --copt=-w
+build:macos --copt=-w
+
+# By default, build TF in C++ 17 mode.
+build:linux --cxxopt=-std=c++17
+build:linux --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=1
+build:linux --host_cxxopt=-std=c++17
+build:macos --cxxopt=-std=c++17
+build:macos --cxxopt=-D_GLIBCXX_USE_CXX11_ABI=1
+build:macos --host_cxxopt=-std=c++17
+
+
+# Suppress all warning messages.
+build:short_logs --output_filter=DONT_MATCH_ANYTHING
+
+build:macos --macos_minimum_os=10.12
+
+# from cxx
+build:linux --@rules_rust//:extra_rustc_flags=-Clink-arg=-fuse-ld=lld

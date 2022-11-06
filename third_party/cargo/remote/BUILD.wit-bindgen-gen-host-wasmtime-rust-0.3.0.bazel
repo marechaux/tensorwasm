@@ -1,0 +1,88 @@
+"""
+@generated
+cargo-raze crate build file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+# buildifier: disable=load
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+# buildifier: disable=load
+load(
+    "@rules_rust//rust:defs.bzl",
+    "rust_binary",
+    "rust_library",
+    "rust_proc_macro",
+    "rust_test",
+)
+
+package(default_visibility = [
+    # Public for visibility by "@raze__crate__version//" targets.
+    #
+    # Prefer access through "//third_party/cargo", which limits external
+    # visibility to explicit Cargo.toml dependencies.
+    "//visibility:public",
+])
+
+licenses([
+    "restricted",  # no license
+])
+
+# Generated Targets
+# buildifier: disable=out-of-order-load
+# buildifier: disable=load-on-top
+load(
+    "@rules_rust//cargo:cargo_build_script.bzl",
+    "cargo_build_script",
+)
+
+cargo_build_script(
+    name = "wit_bindgen_gen_host_wasmtime_rust_build_script",
+    srcs = glob(["**/*.rs"]),
+    build_script_env = {
+    },
+    crate_root = "crates/gen-host-wasmtime-rust/build.rs",
+    data = glob(["**"]),
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+    version = "0.3.0",
+    visibility = ["//visibility:private"],
+    deps = [
+    ],
+)
+
+rust_library(
+    name = "wit_bindgen_gen_host_wasmtime_rust",
+    srcs = glob(["**/*.rs"]),
+    crate_root = "crates/gen-host-wasmtime-rust/src/lib.rs",
+    data = [],
+    edition = "2021",
+    rustc_flags = [
+        "--cap-lints=allow",
+    ],
+    tags = [
+        "cargo-raze",
+        "crate-name=wit-bindgen-gen-host-wasmtime-rust",
+        "manual",
+    ],
+    version = "0.3.0",
+    # buildifier: leave-alone
+    deps = [
+        ":wit_bindgen_gen_host_wasmtime_rust_build_script",
+        "@raze__heck__0_4_0//:heck",
+        "@raze__wit_bindgen_core__0_3_0//:wit_bindgen_core",
+        "@raze__wit_bindgen_gen_rust_lib__0_3_0//:wit_bindgen_gen_rust_lib",
+        "@raze__wit_component__0_3_0//:wit_component",
+    ],
+)
+
+# Unsupported target "codegen" with type "test" omitted
+
+# Unsupported target "runtime" with type "test" omitted

@@ -1,0 +1,103 @@
+"""
+@generated
+cargo-raze generated Bazel file.
+
+DO NOT EDIT! Replaced on runs of cargo-raze
+"""
+
+package(default_visibility = ["//visibility:public"])
+
+licenses([
+    "notice",  # See individual crates for specific licenses
+])
+
+# Aliased targets
+alias(
+    name = "anyhow",
+    actual = "@raze__anyhow__1_0_65//:anyhow",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "cxx",
+    actual = "@raze__cxx__1_0_80//:cxx",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "cxx_cc_library",
+    actual = "@raze__cxx__1_0_80//:cxx_cc_library",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "cargo_bin_cxxbridge",
+    actual = "@raze__cxxbridge_cmd__1_0_80//:cargo_bin_cxxbridge",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "cxxbridge_cmd",
+    actual = "@raze__cxxbridge_cmd__1_0_80//:cxxbridge_cmd",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "cxxbridge_macro",
+    actual = "@raze__cxxbridge_macro__1_0_80//:cxxbridge_macro",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "wit_bindgen_host_wasmtime_rust",
+    actual = "@raze__wit_bindgen_host_wasmtime_rust__0_3_0//:wit_bindgen_host_wasmtime_rust",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+alias(
+    name = "wit_bindgen_host_wasmtime_rust_macro",
+    actual = "@raze__wit_bindgen_host_wasmtime_rust_macro__0_3_0//:wit_bindgen_host_wasmtime_rust_macro",
+    tags = [
+        "cargo-raze",
+        "manual",
+    ],
+)
+
+# Export file for Stardoc support
+exports_files(
+    glob([
+        "**/*.bazel",
+        "**/*.bzl",
+    ]),
+    visibility = ["//visibility:public"],
+)
+
+filegroup(
+    name = "srcs",
+    srcs = glob([
+        "**/*.bazel",
+        "**/*.bzl",
+    ]),
+    visibility = ["//visibility:public"],
+)

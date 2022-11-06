@@ -1,0 +1,4 @@
+--- cranelift/isle/isle/src/lib.rs	2022-10-30 17:06:46.000000000 +0100
++++ cranelift/isle/isle/src/lib.rs	2022-10-30 17:06:44.000000000 +0100
+@@ -1 +0,0 @@
+-#![doc = include_str!("../README.md")]

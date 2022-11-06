@@ -1,0 +1,7 @@
+--- crates/runtime/build.rs	2022-10-30 17:13:55.000000000 +0100
++++ crates/runtime/build.rs	2022-10-30 17:13:52.000000000 +0100
+@@ -14,2 +14,2 @@
+-    println!("cargo:rerun-if-changed=src/helpers.c");
+-    build.file("src/helpers.c");
++    println!("cargo:rerun-if-changed=crates/runtime/src/helpers.c");
++    build.file("crates/runtime/src/helpers.c");
