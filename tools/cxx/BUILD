@@ -4,8 +4,10 @@ load("@bazel_skylib//rules:write_file.bzl", "write_file")
 # TODO : auto-generate this file from the BUILD file ? 
 _GENERATED = {
     "src/engine/src/lib.rs.h": "//src/engine:src/lib.rs.h",
-    "tensorflow/core/framework": "@org_tensorflow//tensorflow/core:framework",
+    # "tensorflow/core/framework": "@org_tensorflow//tensorflow/core:framework",
 }
+
+# TODO : add tests ? 
 
 # Generate the updater script so there's only one target for devs to run,
 # even if many generated files are in the source folder.

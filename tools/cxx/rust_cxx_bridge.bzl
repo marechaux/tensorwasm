@@ -1,9 +1,6 @@
 # buildifier: disable=module-docstring
 load("@bazel_skylib//rules:run_binary.bzl", "run_binary")
 load("@rules_cc//cc:defs.bzl", "cc_library")
-load("@bazel_skylib//rules:diff_test.bzl", "diff_test")
-load("@bazel_skylib//rules:write_file.bzl", "write_file")
-load("@org_tensorflow//tensorflow:tensorflow.bzl", "tf_cc_shared_library")
 
 
 def rust_cxx_bridge(name, src, deps = []):
